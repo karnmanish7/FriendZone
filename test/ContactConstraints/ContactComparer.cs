@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using FriendZone.Entities;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace test.ContactConstraints
 {
@@ -7,6 +9,9 @@ namespace test.ContactConstraints
 
     class ContactComparer : IComparer<Contact>
     {
-
+        public int Compare([NotNull] Contact x, [NotNull] Contact y)
+        {
+            return x.ContactId.Equals(y.ContactId) == true ? 1 : 0;
+        }
     }
 }

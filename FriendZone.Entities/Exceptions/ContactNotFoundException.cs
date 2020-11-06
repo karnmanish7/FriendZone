@@ -1,7 +1,13 @@
-﻿namespace FriendZone.Entities.Exceptions
+﻿using System;
+
+namespace FriendZone.Entities.Exceptions
 {
-    public class ContactNotFoundException
+    public class ContactNotFoundException : Exception
     {
 
+        public ContactNotFoundException(string message):base(message)
+        {
+
+        }
     }
 }

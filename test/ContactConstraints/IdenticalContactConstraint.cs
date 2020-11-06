@@ -6,6 +6,9 @@ namespace test.ContactConstraints
 
     class IdenticalContactConstraint : Constraint
     {
-
+        public override ConstraintResult ApplyTo<TActual>(TActual actual)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework.Constraints;
+﻿using FriendZone.Entities;
+using NUnit.Framework.Constraints;
 using System.Collections.Generic;
 
 namespace test.ContactConstraints
