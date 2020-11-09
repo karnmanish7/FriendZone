@@ -1,64 +1,73 @@
-﻿using FriendZone.Entities;
+﻿using FriendZone.DAO;
+using FriendZone.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FriendZone.Service
 {
     public class ContactService : IContactService
     {
+        private IContactRepository _contactRepository;
+
+        public ContactService(IContactRepository contactRepository)
+        {
+            this._contactRepository = contactRepository;
+        }
         public Contact AddContact(Contact contact)
         {
-            throw new NotImplementedException();
+           return this._contactRepository.CreateContact(contact);
         }
 
         public Contact DeleteContact(int contactId)
         {
-            throw new NotImplementedException();
+            return this._contactRepository.DeleteContact(contactId);
         }
 
         public Contact GetContactById(int contactID)
         {
-            throw new NotImplementedException();
+            return this._contactRepository.GetContactById(contactID);
         }
 
         public List<Contact> GetContacts()
         {
-            throw new NotImplementedException();
+            return this._contactRepository.GetContacts().ToList();
         }
 
         public List<Contact> GetContactsByBirthMonth(int month)
         {
-            throw new NotImplementedException();
+            return this._contactRepository.GetContacts(month: month).ToList();
         }
 
         public List<Contact> GetContactsByBloodGroup(string bloodGroup)
         {
-            throw new NotImplementedException();
+            return this._contactRepository.GetContacts(bloodGroup: bloodGroup).ToList();
         }
 
         public List<Contact> GetContactsByFirstName(string firstName)
         {
-            throw new NotImplementedException();
+            return this._contactRepository.GetContacts(firstName: firstName).ToList();
         }
 
         public List<Contact> GetContactsByFullName(string firstName, string lastName)
         {
-            throw new NotImplementedException();
+            return this._contactRepository.GetContacts(firstName: firstName, lastName: lastName).ToList();
         }
 
         public List<Contact> GetContactsByLastName(string lastName)
         {
-            throw new NotImplementedException();
+            return this._contactRepository.GetContacts(lastName: lastName).ToList();
         }
 
         public List<Contact> GetContactsWithBirthdaysInCurrentMonth()
         {
-            throw new NotImplementedException();
+            return this._contactRepository.GetContacts(month: 1).ToList();
         }
 
         public Contact UpdateContact(int contactId, Contact updatedContact)
         {
-            throw new NotImplementedException();
+            // before updatating contract check if contract exist or not if not throw apporpriate exception 
+            return this._contactRepository.UpdateContact(updatedContact);
         }
     }
 }

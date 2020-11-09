@@ -15,12 +15,36 @@
 
         #endregion
 
+        public void GivenValidContractToContractRepositoryReturnCreatedContract()
+        {
+           
+        }
+
+        public void GivenWhenPassedValidContractIdToDeleteContractReturnsDeletedContract()
+        {
+
+        }
+
+        public void ReturnValidContractWhenAskedContractById()
+        {
+
+        }
+
+        public void CheckContractExistOrNot()
+        {
+
+        }   
 
         #region test_manipulation_methods
 
 
 
         #endregion
+
+        public void WhenUpdatingValidContractReturnsThenUpdatedContract()
+        {
+
+        }
 
         #endregion
 
