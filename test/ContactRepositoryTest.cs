@@ -1,7 +1,13 @@
-﻿namespace test
+﻿using FriendZone.DAO;
+using FriendZone.Entities;
+using NUnit.Framework;
+
+namespace test
 {
+    [TestFixture]
     public class ContactRepositoryTest
     {
+        private IContactRepository _contractRepository = new ContactRepository();
         public void SetUp()
         {
 
@@ -14,10 +20,14 @@
 
 
         #endregion
-
+        [TestCase]
         public void GivenValidContractToContractRepositoryReturnCreatedContract()
         {
-           
+            var contract = new Contact() { Address = "abc" };
+
+            var createdContract = _contractRepository.CreateContact(contract);
+
+            Assert.AreEqual(contract.Address, createdContract.Address);
         }
 
         public void GivenWhenPassedValidContractIdToDeleteContractReturnsDeletedContract()

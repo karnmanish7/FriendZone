@@ -5,18 +5,18 @@ namespace test.ContactConstraints
 {
     //This class contains logic to compare two different lists of contacts and use it for creating Customized Constraint for Assertion
 
-    class IdenticalContactListConstraint : Constraint
-    {
-        List<Contact> expectedContactList;
-        public IdenticalContactListConstraint(List<Contact> expectedListValue)
-        {
+    //class IdenticalContactListConstraint : Constraint
+    //{
+    //    List<Contact> expectedContactList;
+    //    public IdenticalContactListConstraint(List<Contact> expectedListValue)
+    //    {
 
-        }
+    //    }
 
-        public override ConstraintResult ApplyTo<TActual>(TActual actual)
-        {
+    //    public override ConstraintResult ApplyTo<TActual>(TActual actual)
+    //    {
 
-        }
+    //    }
 
-    }
+    //}
 }

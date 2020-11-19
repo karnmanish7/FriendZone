@@ -8,14 +8,14 @@ namespace test.ContactConstraints
 
     static class IdenticalContactExtensions
     {
-        public static IdenticalContactListConstraint IdenticalTo(this ConstraintExpression expression, List<Contact> expectedList)
-        {
+        //public static IdenticalContactListConstraint IdenticalTo(this ConstraintExpression expression, List<Contact> expectedList)
+        //{
 
-        }
-        public static IdenticalContactConstraint IdenticalTo(this ConstraintExpression expression, Contact expected)
-        {
+        //}
+        //public static IdenticalContactConstraint IdenticalTo(this ConstraintExpression expression, Contact expected)
+        //{
 
-        }
+        //}
 
     }
 }
