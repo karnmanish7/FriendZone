@@ -28,7 +28,20 @@ namespace test
         [TestCase]
         public void GivenValidContractToContractServiceReturnCreatedContract()
         {
-            var contract = new Contact() { Address = "abc" };
+            var contract = new Contact() {
+                ContactId = 1,
+                FirstName = "mkcheck",
+                LastName = "karn",
+                ContactNo = "8107898901",
+                Email = "m.karn@test.com",
+                BirthDate = "01/01/1995",
+                Address = "blr",
+                City = "bangalore",
+                Pincode = "549900",
+                BloodGroup = "B+",
+                CreationDate = DateAndTime.Now.ToString()
+
+            };
 
             var createdContract = _contractService.AddContact(contract);
 

@@ -4,14 +4,16 @@ using FriendZone.Entities.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace FriendZone.Service
 {
     public class ContactService : IContactService
     {
         private IContactRepository _contactRepository;
-
-        public ContactService(IContactRepository contactRepository)
+       
+      
+    public ContactService(IContactRepository contactRepository)
         {
             this._contactRepository = contactRepository;
         }
@@ -19,9 +21,56 @@ namespace FriendZone.Service
         {
             if (contact == null)
                 throw new InvalidInputException("Contract can not be null or empty");
-           return this._contactRepository.CreateContact(contact);
+            if (contact.FirstName == null || contact.ContactNo == null || contact.CreationDate == null)
+                throw new InvalidInputException("invalid inputs");
+            if (contact.FirstName.Length < 3)
+                throw new InvalidInputException("Name length should not be less than 3 characters");
+            bool isValidName = IsAlphabets(contact.FirstName) && IsAlphabets(contact.LastName);
+            if (!isValidName)
+                throw new InvalidInputException("Name should contains only alphabest");
+            var isValidBloodGroupType = IsValidBloodGroup(contact.BloodGroup);
+            if (!isValidBloodGroupType)
+                throw new InvalidInputException("BloodGroup should accept only the values : A+, A-, B+, B-, AB+, AB-, O+, O-");
+            var isValidPin = IsValidPincode(contact.Pincode);
+            if (!isValidPin)
+                throw new InvalidInputException("Pincode should be 6 digits only");
+            if (contact.ContactNo.Length!=10)
+                throw new InvalidInputException("ContactNO should be 10 digits only");
+            DateTime dileverydate = Convert.ToDateTime(contact.BirthDate);
+            var todaysDate = DateTime.Today;
+            int result = DateTime.Compare(dileverydate, todaysDate);
+            // Calculate the age.
+            var age = todaysDate.Year - dileverydate.Year;
+            if (result > 0 || age<15)
+                throw new InvalidInputException("birthDate should not be greater than current date and age should be atleast 15 years");
+            return this._contactRepository.CreateContact(contact);
         }
-
+        public bool IsAlphabets(string inputString)
+        {
+            Regex r = new Regex("^[a-zA-Z ]+$");
+            if (r.IsMatch(inputString))
+                return true;
+            else
+                return false;
+        }
+        public bool IsValidBloodGroup(string inputString)
+        {
+            Regex r = new Regex("(A|B|AB|O)[+-]");
+            if (r.IsMatch(inputString))
+                return true;
+            else
+                return false;
+        }
+        public bool IsValidPincode(string inputString)
+        {
+            Regex r = new Regex("^[1-9] [0-9]{5}$");
+            if (r.IsMatch(inputString))
+                return true;
+            else
+                return false;
+        }
+      
+        
         public Contact DeleteContact(int contactId)
         {
             if (contactId <= 0)
