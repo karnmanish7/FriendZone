@@ -24,7 +24,7 @@ namespace test
         #region test_get_methods
 
         [TestCase]
-        public void GivenValidContractToContractRepositoryReturnCreatedContact()
+        public void GivenValidContactToContractRepositoryReturnCreatedContact()
         {
             var contract = new Contact() { Address = "abc" };
 
@@ -32,19 +32,11 @@ namespace test
 
             Assert.AreEqual(contract.Address, createdContract.Address);
         }
+       
         [TestCase]
-        public void GivenWhenPassedValidContractIdToDeleteContractReturnsDeletedContact()
+        public void ReturnValidContactWhenAskedContactById()
         {
-            var contactId = 1;
-            var result = _contactRepository.DeleteContact(contactId);
-            var newContact = _contactRepository.GetContactById(contactId);
-            Assert.AreEqual(result.ContactId, contactId);
-            Assert.AreEqual(null, newContact);
-        }
-        [TestCase]
-        public void ReturnValidContractWhenAskedContactById()
-        {
-            var contactId = 3;
+            var contactId = 2;
             var newContact = _contactRepository.GetContactById(contactId);
             Assert.AreEqual(newContact.ContactId, contactId);
         }
@@ -56,21 +48,83 @@ namespace test
         #endregion
         #region test_manipulation_methods
 
-
+        [TestCase]
+        public void GivenWhenPassedValidContactIdToDeleteContractReturnsDeletedContact()
+        {
+            var contactId = 1;
+            var result = _contactRepository.DeleteContact(contactId);
+            var newContact = _contactRepository.GetContactById(contactId);
+            Assert.AreEqual(result.ContactId, contactId);
+            Assert.AreEqual(null, newContact);
+        }
+        [TestCase]
+        public void WhenUpdatingValidContactReturnsThenUpdatedContact()
+        {
+            
+            var contact = new Contact()
+            {
+                ContactId = 1,
+                FirstName = "jackUpdated",
+                LastName = "mike",
+                ContactNo = "8107898901",
+                Email = "jack@test.com",
+                BirthDate = "01/01/1999",
+                Address = "blr",
+                City = "bangalore",
+                Pincode = "54990",
+                BloodGroup = "b+",
+                CreationDate = DateAndTime.Now.ToString()
+            };
+            var result = _contactRepository.UpdateContact(contact);
+            var newContact = _contactRepository.GetContactById(result.ContactId);
+            Assert.AreEqual(result, newContact);
+        }
 
         #endregion
-
-        public void WhenUpdatingValidContractReturnsThenUpdatedContact()
-        {
-
-        }
 
         #endregion
 
         #region negative_test_cases
 
         #region test_get_methods
+        [TestCase]
+        public void WhenUpdatingInValidContactReturnsThenUpdatedContact()
+        {
 
+            var contact = new Contact()
+            {
+                ContactId = 1,
+                FirstName = "jackUpdated",
+                LastName = "mike",
+                ContactNo = "8107898901",
+                Email = "jack@test.com",
+                BirthDate = "01/01/1999",
+                Address = "blr",
+                City = "bangalore",
+                Pincode = "54990",
+                BloodGroup = "b+",
+                CreationDate = DateAndTime.Now.ToString()
+            };
+            var result = _contactRepository.UpdateContact(contact);
+            var newContact = _contactRepository.GetContactById(2);
+            Assert.AreNotEqual(result, newContact);
+        }
+        [TestCase]
+        public void GivenWhenPassedInValidContactIdToDeleteContractReturnsDeletedContact()
+        {
+            var contactId = 2;
+            var result = _contactRepository.DeleteContact(contactId);
+            var newContact = _contactRepository.GetContactById(1);
+            Assert.AreNotEqual(result.ContactId, 1);
+            Assert.AreNotEqual(null, newContact);
+        }
+        [TestCase]
+        public void ReturnInValidContactWhenAskedContactById()
+        {
+            var contactId = 2;
+            var newContact = _contactRepository.GetContactById(contactId);
+            Assert.AreNotEqual(newContact.ContactId, 3);
+        }
         #endregion
 
 
