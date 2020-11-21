@@ -17,22 +17,22 @@ namespace FriendZone.DAO
         public Contact CreateContact(Contact contact)
         {
           
-            this._contact.Add(this.CloneContract(contact));
+            this._contact.Add(this.CloneContact(contact));
 
-            return this.CloneContract(contact);
+            return this.CloneContact(contact);
         }
 
         public Contact DeleteContact(int contactId)
         {
-            var contract =this._contact.Find(c => c.ContactId == contactId);
-            this._contact.Remove(contract);
-            return contract;
+            var contact =this._contact.Find(c => c.ContactId == contactId);
+            this._contact.Remove(contact);
+            return contact;
         }
 
         public Contact GetContactById(int contactId)
         {
-            var contract = this._contact.Find(c => c.ContactId == contactId);
-            return this.CloneContract(contract);
+            var contact = this._contact.Find(c => c.ContactId == contactId);
+            return this.CloneContact(contact);
         }
 
         public IReadOnlyList<Contact> GetContacts(string firstName = null, string lastName = null, int? month = null, string bloodGroup = null)
@@ -52,27 +52,30 @@ namespace FriendZone.DAO
 
         public Contact UpdateContact(Contact updatedContact)
         {
-            var contract = this._contact.Find(c => c.ContactId == updatedContact.ContactId);
+            var contact = this._contact.Find(c => c.ContactId == updatedContact.ContactId);
 
-            contract.ContactId = updatedContact.ContactId;
-            contract.FirstName = updatedContact.FirstName;
-            contract.LastName = updatedContact.LastName;
-            contract.ContactNo = updatedContact.ContactNo;
-            contract.Email = updatedContact.Email;
-            contract.BirthDate = updatedContact.BirthDate;
-            contract.Address = updatedContact.Address;
-            contract.City = updatedContact.City;
-            contract.Pincode = updatedContact.Pincode;
-            contract.BloodGroup = updatedContact.BloodGroup;
-            contract.CreationDate = updatedContact.CreationDate;
+            contact.ContactId = updatedContact.ContactId;
+            contact.FirstName = updatedContact.FirstName;
+            contact.LastName = updatedContact.LastName;
+            contact.ContactNo = updatedContact.ContactNo;
+            contact.Email = updatedContact.Email;
+            contact.BirthDate = updatedContact.BirthDate;
+            contact.Address = updatedContact.Address;
+            contact.City = updatedContact.City;
+            contact.Pincode = updatedContact.Pincode;
+            contact.BloodGroup = updatedContact.BloodGroup;
+            contact.CreationDate = updatedContact.CreationDate;
 
-            return CloneContract(contract);
+            return CloneContact(contact);
         }
 
        
-        private Contact CloneContract(Contact InputContact)
+        private Contact CloneContact(Contact InputContact)
         {
-            Contact repoContract = new Contact()
+            if(InputContact == null) {
+                return null;
+            }
+            Contact repoContact = new Contact()
             {
                 ContactId=InputContact.ContactId,
                 FirstName = InputContact.FirstName,
@@ -89,7 +92,7 @@ namespace FriendZone.DAO
 
             };
 
-            return repoContract;
+            return repoContact;
         }
     }
 }

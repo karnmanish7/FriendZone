@@ -25,7 +25,7 @@ namespace FriendZone.Service
         public Contact DeleteContact(int contactId)
         {
             if (contactId <= 0)
-                throw new InvalidInputException("Contract Id must be greater than 0");
+                throw new InvalidInputException("Contact Id must be greater than 0");
             return this._contactRepository.DeleteContact(contactId);
         }
 
@@ -33,13 +33,13 @@ namespace FriendZone.Service
         {
 
             if (contactID <= 0)
-                throw new InvalidInputException("Contract Id must be greater than 0");
+                throw new InvalidInputException("Contact Id must be greater than 0");
           
-            var contract = this._contactRepository.GetContactById(contactID);
+            var contact = this._contactRepository.GetContactById(contactID);
 
-            if (contract == null)
-                throw new ContactNotFoundException("Contract Not found");
-            return contract;
+            if (contact == null)
+                throw new ContactNotFoundException("Contact Not found");
+            return contact;
         }
 
         public List<Contact> GetContacts()
