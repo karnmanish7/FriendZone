@@ -1,5 +1,6 @@
 ﻿using FriendZone.DAO;
 using FriendZone.Entities;
+using FriendZone.Entities.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +17,29 @@ namespace FriendZone.Service
         }
         public Contact AddContact(Contact contact)
         {
+            if (contact == null)
+                throw new InvalidInputException("Contract can not be null or empty");
            return this._contactRepository.CreateContact(contact);
         }
 
         public Contact DeleteContact(int contactId)
         {
+            if (contactId <= 0)
+                throw new InvalidInputException("Contract Id must be greater than 0");
             return this._contactRepository.DeleteContact(contactId);
         }
 
         public Contact GetContactById(int contactID)
         {
-            return this._contactRepository.GetContactById(contactID);
+
+            if (contactID <= 0)
+                throw new InvalidInputException("Contract Id must be greater than 0");
+          
+            var contract = this._contactRepository.GetContactById(contactID);
+
+            if (contract == null)
+                throw new ContactNotFoundException("Contract Not found");
+            return contract;
         }
 
         public List<Contact> GetContacts()
@@ -68,6 +81,12 @@ namespace FriendZone.Service
         {
             // before updatating contract check if contract exist or not if not throw apporpriate exception 
             return this._contactRepository.UpdateContact(updatedContact);
+        }
+
+        private bool ValidateContract(Contact contact)
+        {
+            // check all the properties on contact exist not return false
+            return true;
         }
     }
 }
