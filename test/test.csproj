@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FriendZone.Entities\FriendZone.Entities.csproj" />
     <ProjectReference Include="..\FriendZoneRepository\FriendZone.DAO.csproj" />
+    <ProjectReference Include="..\FriendZoneService\FriendZone.Service.csproj" />
   </ItemGroup>
 
 </Project>
