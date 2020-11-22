@@ -10,7 +10,7 @@ namespace FriendZone.DAO
         Contact GetContactById(int contactId);
         IReadOnlyList<Contact> GetContacts(string firstName = null, string lastName = null, int? month = null, string bloodGroup = null);
 
-        bool IsContactNoExists(string contactNo);
+        bool IsContactExists(int contactId);
         IReadOnlyList<Contact> GetContactsWithBirthdaysInCurrentMonth();
         Contact UpdateContact(Contact updatedContact);
     }

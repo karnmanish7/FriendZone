@@ -37,7 +37,8 @@ namespace FriendZone.DAO
 
         public IReadOnlyList<Contact> GetContacts(string firstName = null, string lastName = null, int? month = null, string bloodGroup = null)
         {
-            throw new NotImplementedException();
+            
+            return this._contact.ToList();
         }
 
         public IReadOnlyList<Contact> GetContactsWithBirthdaysInCurrentMonth()
@@ -45,9 +46,9 @@ namespace FriendZone.DAO
             return null;
         }
 
-        public bool IsContactNoExists(string contactNo)
+        public bool IsContactExists(int contactId)
         {
-            return this._contact.Where(c => c.ContactNo == contactNo).FirstOrDefault() == null ? false : true;
+            return this._contact.Where(c => c.ContactId == contactId).FirstOrDefault() == null ? false : true;
         }
 
         public Contact UpdateContact(Contact updatedContact)

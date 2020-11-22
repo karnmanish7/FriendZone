@@ -2,6 +2,8 @@
 using FriendZone.Entities;
 using Microsoft.VisualBasic;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace test
 {
@@ -24,6 +26,16 @@ namespace test
         #region test_get_methods
 
         [TestCase]
+        public void ReturnValidContactWhenAskedGetAllContacts()
+        {
+            var contacts = new List<Contact>();
+
+            var allContacts = _contactRepository.GetContacts().ToList();
+
+            Assert.AreEqual(contacts, allContacts);
+        }
+
+        [TestCase]
         public void GivenValidContactToContractRepositoryReturnCreatedContact()
         {
             var contract = new Contact() { Address = "abc" };
@@ -43,7 +55,9 @@ namespace test
 
         public void CheckContactExistOrNot()
         {
-
+            var contactId = 1;
+            bool isContactExist = _contactRepository.IsContactExists(contactId);
+            Assert.IsTrue(isContactExist);
         }
         #endregion
         #region test_manipulation_methods
@@ -87,6 +101,15 @@ namespace test
         #region negative_test_cases
 
         #region test_get_methods
+        [TestCase]
+        public void ReturnValidContactWhenAskedGetAllContacts()
+        {
+            var contacts = new List<Contact>();
+
+            var allContacts = _contactRepository.GetContacts().ToList();
+
+            Assert.AreEqual(contacts, allContacts);
+        }
         [TestCase]
         public void WhenUpdatingInValidContactReturnsThenUpdatedContact()
         {
