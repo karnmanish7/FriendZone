@@ -37,7 +37,22 @@ namespace FriendZone.DAO
 
         public IReadOnlyList<Contact> GetContacts(string firstName = null, string lastName = null, int? month = null, string bloodGroup = null)
         {
-            
+            if (firstName != null)
+            {
+                return this._contact.Where(c => c.FirstName == firstName).ToList();
+            }
+            if (lastName != null)
+            {
+                return this._contact.Where(c => c.LastName == lastName).ToList();
+            }
+            if (month != null)
+            {
+                return this._contact.Where(c => c.BirthDate == month.ToString()).ToList();
+            }
+            if (bloodGroup != null)
+            {
+                return this._contact.Where(c => c.BloodGroup == bloodGroup).ToList();
+            }
             return this._contact.ToList();
         }
 

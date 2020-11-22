@@ -64,22 +64,23 @@ namespace test
         public void GetContactsByBloodGroup()
         {
             
-            string bloodGroup = "b+";
+            string bloodGroup = "B+";
             var contactByBloodgroup = this._contractService.GetContactsByBloodGroup(bloodGroup: bloodGroup).ToList();
-            Assert.AreEqual(contactByBloodgroup, bloodGroup);
+            Assert.AreEqual(contactByBloodgroup[0].BloodGroup, bloodGroup);
+            
         }
         [TestCase]
         public void GetContactsByFirstName()
         {
-            string firstName = "mannn";
-            var contactByFirstname = this._contractService.GetContactsByFirstName(firstName: firstName).ToList();
-            Assert.AreEqual(contactByFirstname, firstName);
+            string firstName = "jackUpdated";
+            var contactByFirstname = this._contractService.GetContactsByFirstName(FirstName: firstName).ToList();
+            Assert.AreEqual(contactByFirstname[0].FirstName, firstName);
         }
         [TestCase]
         public void GetContactsByFullName()
         {
-            string firstName = "mannn";
-            string lastName = "k";
+            string firstName = "jackUpdated";
+            string lastName = "mike";
            
             var contactByFullname = this._contractService.GetContactsByFullName(firstName: firstName,lastName:lastName).ToList();
             Assert.AreEqual(contactByFullname, firstName+lastName);
@@ -87,9 +88,9 @@ namespace test
         [TestCase]
         public void GetContactsByLastName()
         {
-            string lastName = "K";
+            string lastName = "mike";
             var contactByLastname = this._contractService.GetContactsByLastName(lastName: lastName).ToList();
-            Assert.AreEqual(contactByLastname, lastName);
+            Assert.AreEqual(contactByLastname[0].LastName, lastName);
         }
         [TestCase]
         public void GetContactsWithBirthdaysInCurrentMonth()
@@ -178,15 +179,15 @@ namespace test
             _contractRepository.CreateContact(new Contact()
             {
                 ContactId = 1,
-                FirstName = "mk",
-                LastName = "karn",
+                FirstName = "jackUpdated",
+                LastName = "mike",
                 ContactNo = "8107898901",
-                Email = "m.karn@test.com",
+                Email = "jackUpdated.mike@test.com",
                 BirthDate = "01/01/1999",
                 Address = "blr",
                 City = "bangalore",
                 Pincode = "54990",
-                BloodGroup = "b+",
+                BloodGroup = "B+",
                 CreationDate = DateAndTime.Now.ToString()
             });
             _contractRepository.CreateContact(new Contact()

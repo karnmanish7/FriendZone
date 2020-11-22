@@ -11,7 +11,7 @@ namespace FriendZone.Service
         List<Contact> GetContacts();
         List<Contact> GetContactsByBirthMonth(int month);
         List<Contact> GetContactsByBloodGroup(string bloodGroup);
-        List<Contact> GetContactsByFirstName(string firstName);
+        List<Contact> GetContactsByFirstName(string FirstName);
         List<Contact> GetContactsByFullName(string firstName, string lastName);
         List<Contact> GetContactsByLastName(string lastName);
         List<Contact> GetContactsWithBirthdaysInCurrentMonth();
