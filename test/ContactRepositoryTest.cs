@@ -53,7 +53,9 @@ namespace test
             Assert.AreEqual(newContact.ContactId, contactId);
         }
 
-        public void CheckContactExistOrNot()
+
+        [TestCase]
+        public void ReturnValidCheckContactExistOrNot()
         {
             var contactId = 1;
             bool isContactExist = _contactRepository.IsContactExists(contactId);
@@ -102,7 +104,7 @@ namespace test
 
         #region test_get_methods
         [TestCase]
-        public void ReturnValidContactWhenAskedGetAllContacts()
+        public void ReturnInValidContactWhenAskedGetAllContacts()
         {
             var contacts = new List<Contact>();
 
@@ -147,6 +149,13 @@ namespace test
             var contactId = 2;
             var newContact = _contactRepository.GetContactById(contactId);
             Assert.AreNotEqual(newContact.ContactId, 3);
+        }
+        [TestCase]
+        public void ReturnInValidCheckContactExistOrNot()
+        {
+            var contactId = 3;
+            bool isContactExist = _contactRepository.IsContactExists(contactId);
+            Assert.IsFalse(isContactExist);
         }
         #endregion
 

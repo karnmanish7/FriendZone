@@ -132,10 +132,18 @@ namespace FriendZone.Service
             return this._contactRepository.UpdateContact(updatedContact);
         }
 
-        private bool ValidateContract(Contact contact)
+        private bool ValidateContact(Contact contact)
         {
             // check all the properties on contact exist not return false
-            return true;
+            if (contact.FirstName != null || contact.ContactNo != null || contact.CreationDate != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+               
         }
     }
 }
