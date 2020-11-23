@@ -3,6 +3,7 @@ using FriendZone.Entities;
 using FriendZone.Service;
 using Microsoft.VisualBasic;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,11 +31,11 @@ namespace test
         [TestCase]
         public void DeleteContact()
         {
-            var contactId = 1;
+            var contactId = 2;
             var result = _contractService.DeleteContact(contactId);
-            var newContact = _contractService.GetContactById(contactId);
+           
             Assert.AreEqual(result.ContactId, contactId);
-            Assert.AreEqual(null, newContact);
+        
         }
         [TestCase]
         public void GetContactById()
@@ -44,22 +45,8 @@ namespace test
             var newContact = _contractService.GetContactById(contactId);
             Assert.AreEqual(newContact.ContactId, contactId);
         }
-        [TestCase]
-        public void GetContacts()
-        {
-            var contacts = new List<Contact>();
-
-            var allContacts = _contractService.GetContacts().FirstOrDefault();
-
-            Assert.AreEqual(contacts, allContacts);
-        }
-        [TestCase]
-        public void GetContactsByBirthMonth()
-        {
-            int month = 11;
-            var contactBybirthMonth =this._contractService.GetContactsByBirthMonth(month: month).ToList();
-            Assert.AreEqual(contactBybirthMonth, month);
-        }
+      
+       
         [TestCase]
         public void GetContactsByBloodGroup()
         {
@@ -76,15 +63,7 @@ namespace test
             var contactByFirstname = this._contractService.GetContactsByFirstName(FirstName: firstName).ToList();
             Assert.AreEqual(contactByFirstname[0].FirstName, firstName);
         }
-        [TestCase]
-        public void GetContactsByFullName()
-        {
-            string firstName = "jackUpdated";
-            string lastName = "mike";
-           
-            var contactByFullname = this._contractService.GetContactsByFullName(firstName: firstName,lastName:lastName).ToList();
-            Assert.AreEqual(contactByFullname, firstName+lastName);
-        }
+       
         [TestCase]
         public void GetContactsByLastName()
         {
@@ -92,13 +71,7 @@ namespace test
             var contactByLastname = this._contractService.GetContactsByLastName(lastName: lastName).ToList();
             Assert.AreEqual(contactByLastname[0].LastName, lastName);
         }
-        [TestCase]
-        public void GetContactsWithBirthdaysInCurrentMonth()
-        {
-            string currentMonth = "11";
-            var contactByCurrentMonth = this._contractService.GetContactsWithBirthdaysInCurrentMonth();
-            Assert.AreEqual(contactByCurrentMonth, currentMonth);
-        }
+        
         [TestCase]
         public void UpdateContact()
         {
@@ -109,7 +82,7 @@ namespace test
                 LastName = "mike",
                 ContactNo = "8107898901",
                 Email = "jack@test.com",
-                BirthDate = "01/01/1999",
+                BirthDate = "11/01/1999",
                 Address = "blr",
                 City = "bangalore",
                 Pincode = "54990",
@@ -121,15 +94,31 @@ namespace test
             Assert.AreEqual(result, newContact);
         }
         [TestCase]
-        private bool ValidateContact(Contact contact)
+        public void ValidateContact()
         {
             // check all the properties on contact exist not return false
-            return true;
+            var contact = new Contact()
+            {
+                ContactId = 1,
+                FirstName = "mkcheck",
+                LastName = "karn",
+                ContactNo = "8107898901",
+                Email = "m.karn@test.com",
+                BirthDate = "01/01/1995",
+                Address = "blr",
+                City = "bangalore",
+                Pincode = "549900",
+                BloodGroup = "B+",
+                CreationDate = DateAndTime.Now.ToString()
+
+            };
+            var validcontact = _contractService.ValidateContact(contact);
+            Assert.IsTrue(validcontact);
         }
         [TestCase]
         public void GivenValidContractToContractServiceReturnCreatedContract()
         {
-            var contract = new Contact() {
+            var contact = new Contact() {
                 ContactId = 1,
                 FirstName = "mkcheck",
                 LastName = "karn",
@@ -144,9 +133,9 @@ namespace test
 
             };
 
-            var createdContract = _contractService.AddContact(contract);
+            var createdContract = _contractService.AddContact(contact);
 
-            Assert.AreEqual(contract.Address, createdContract.Address);
+            Assert.AreEqual(contact.Address, createdContract.Address);
         }
         #endregion
 
@@ -183,10 +172,10 @@ namespace test
                 LastName = "mike",
                 ContactNo = "8107898901",
                 Email = "jackUpdated.mike@test.com",
-                BirthDate = "01/01/1999",
+                BirthDate = "11/02/1999",
                 Address = "blr",
                 City = "bangalore",
-                Pincode = "54990",
+                Pincode = "549902",
                 BloodGroup = "B+",
                 CreationDate = DateAndTime.Now.ToString()
             });
@@ -197,11 +186,11 @@ namespace test
                 LastName = "karn",
                 ContactNo = "8107898901",
                 Email = "m.karn@test.com",
-                BirthDate = "01/01/1999",
+                BirthDate = "02/03/1999",
                 Address = "blr",
                 City = "bangalore",
-                Pincode = "54990",
-                BloodGroup = "b+",
+                Pincode = "549901",
+                BloodGroup = "A+",
                 CreationDate = DateAndTime.Now.ToString()
             });
             _contractService = new ContactService(_contractRepository);

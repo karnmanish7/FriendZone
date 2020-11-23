@@ -63,7 +63,9 @@ namespace FriendZone.Service
         }
         public bool IsValidPincode(string inputString)
         {
-            Regex r = new Regex("^[1-9] [0-9]{5}$");
+            //Regex r = new Regex("^[1-9] [0-9]{6}$");
+            Regex r = new Regex("^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$");
+            
             if (r.IsMatch(inputString))
                 return true;
             else
@@ -86,8 +88,9 @@ namespace FriendZone.Service
           
             var contact = this._contactRepository.GetContactById(contactID);
 
-            if (contact == null)
+            if (contact == null) 
                 throw new ContactNotFoundException("Contact Not found");
+
             return contact;
         }
 
@@ -132,7 +135,7 @@ namespace FriendZone.Service
             return this._contactRepository.UpdateContact(updatedContact);
         }
 
-        private bool ValidateContact(Contact contact)
+        public bool ValidateContact(Contact contact)
         {
             // check all the properties on contact exist not return false
             if (contact.FirstName != null || contact.ContactNo != null || contact.CreationDate != null)

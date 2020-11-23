@@ -47,7 +47,7 @@ namespace FriendZone.DAO
             }
             if (month != null)
             {
-                return this._contact.Where(c => c.BirthDate == month.ToString()).ToList();
+                return this._contact.Where(c => DateTime.Parse(c.BirthDate).Month.ToString()== month.ToString()).ToList();
             }
             if (bloodGroup != null)
             {

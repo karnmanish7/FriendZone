@@ -25,15 +25,7 @@ namespace test
 
         #region test_get_methods
 
-        [TestCase]
-        public void ReturnValidContactWhenAskedGetAllContacts()
-        {
-            var contacts = new List<Contact>();
-
-            var allContacts = _contactRepository.GetContacts().ToList();
-
-            Assert.AreEqual(contacts, allContacts);
-        }
+       
 
         [TestCase]
         public void GivenValidContactToContractRepositoryReturnCreatedContact()
@@ -103,15 +95,7 @@ namespace test
         #region negative_test_cases
 
         #region test_get_methods
-        [TestCase]
-        public void ReturnInValidContactWhenAskedGetAllContacts()
-        {
-            var contacts = new List<Contact>();
-
-            var allContacts = _contactRepository.GetContacts().ToList();
-
-            Assert.AreEqual(contacts, allContacts);
-        }
+        
         [TestCase]
         public void WhenUpdatingInValidContactReturnsThenUpdatedContact()
         {

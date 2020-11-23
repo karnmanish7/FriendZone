@@ -16,5 +16,6 @@ namespace FriendZone.Service
         List<Contact> GetContactsByLastName(string lastName);
         List<Contact> GetContactsWithBirthdaysInCurrentMonth();
         Contact UpdateContact(int contactId, Contact updatedContact);
+        bool ValidateContact(Contact contact);
     }
 }
